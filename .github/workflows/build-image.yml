@@ -22,14 +22,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install envsubst
+        run: sudo apt-get update && sudo apt-get install -y gettext-base
+
+      - name: Replace environment variables in YAML
+        run: |
+          envsubst < deployment.yml > deploymentenv.yml
+
       - name: Set up kubectl
         uses: actions-hub/kubectl@master
         env:
           KUBE_HOST: ${{ secrets.KUBE_HOST }}
           KUBE_CERTIFICATE: ${{ secrets.KUBE_CERTIFICATE }}
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
-          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
 
         with:
-          args: apply -f deployment.yml
+          args: apply -f deploymentenv.yml
