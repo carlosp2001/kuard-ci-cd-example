@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard-app
+  template:
+    metadata:
+      labels:
+        app: kuard-app
+    spec:
+      containers:
+        - name: kuard-app
+          image: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:latest
