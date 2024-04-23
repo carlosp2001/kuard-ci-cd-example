@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: kuard-deployment
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: kuard-app
@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: kuard-app
-          image: ghcr.io/"$GITHUB_REPOSITORY_OWNER"/"$GITHUB_REPOSITORY":latest
+          image: ghcr.io/{{GITHUB_REPOSITORY_OWNER}}/{{$GITHUB_REPOSITORY}}:latest
