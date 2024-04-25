@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: kuard-app
-          image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/${GITHUB_REPOSITORY}:latest
+          image: ghcr.io/${GITHUB_REPOSITORY}:latest
           ports:
             - containerPort: 8080
       imagePullSecrets:
